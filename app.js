@@ -116,7 +116,7 @@ app.post('/' , async (req,res) => { // req ---> istek    res ---> cevap
         res.status(500).json({ error: 'Veri kaydedilemedi.' });
     }
 });
-
+ //FURKAN ADAMDIR
 
 
 app.delete('/', (req,res) => {
