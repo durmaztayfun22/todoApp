@@ -1,0 +1,33 @@
+// const veriCek = async () => {
+        //     try {
+        //         const response = await fetch('/');
+        //         const data = await response.text();
+        //         const object = JSON.parse(data);
+
+        //         object.map((verii) => {
+        //             const pelementi = document.createElement('p');
+        //             pelementi.innerText = verii;
+        //             veriListesi.appendChild(pelementi);
+        //         });
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
+
+
+
+
+           // const veriPost = async () =>{
+        //     const verr = JSON.stringify(isim.value);
+        //     console.log(verr);
+        //     const response = await fetch('http://localhost:5050/', {
+        //     method: "POST", // *GET, POST, PUT, DELETE, etc.
+        //     body:  verr, // The data to send in the request body
+        //     headers: {
+        //         "Content-Type": "application/json", // The content type of the request body
+        //     },
+        // });
+        // }
+
+
+        GMT","inverseRate":0.59158682510596},"try":{"code":"TRY","alphaCode":"TRY","numericCode":"949","name":"Turkish Lira","rate":27.122683944275,"date":"Mon, 21 Aug 2023 11:55:01 

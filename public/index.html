@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tayfun Durmaz</title>
+    
+</head>
+<body>
+    <h1 class="head">ToDo App</h1>
+    <br>
+    <br>
+    <br>
+    <div class="clock">
+        <p id="date"></p>
+        <p id="time"></p>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <h1>Anlık Dolar-TL Fiyatı: <span id="fiyatDOLAR"></span></h1>
+    <h1>Anlık TL-Dolar Fiyatı: <span id="fiyatTL"></span></h1>
+    <br>
+    <br>
+    <br>
+    
+    <input type="text" id="isim" class="yazi" placeholder="Lütfen Birşeyler yaz">
+    <button id="veriCekButton" class="buton">VeriCek</button>
+    <button id="post">post</button>
+    
+    
+    <div id="veriListesi"></div>
+
+
+    <script>
+        const isim = document.getElementById('isim');
+        const veriCekButton = document.getElementById('veriCekButton');
+        const postBTN = document.getElementById('post');
+        const veriListesi = document.getElementById('veriListesi');
+        const url = "https://www.floatrates.com/daily/usd.json";
+        // const fiyatDOLAR = document.getElementById('fiyatDOLAR');
+        // const fiyatTL = document.getElementById('fiyatTL');
+
+        const dolarYazdir = async () => {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const dolarTlFiyati = data.try.rate; // dolarAl fonksiyonu çıktısına göre ayarlayın
+
+                const fiyatElementi = document.getElementById('fiyatDOLAR');
+                fiyatElementi.textContent = dolarTlFiyati;
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        };
+
+    dolarYazdir();
+
+        const TLYazdir = async () => {
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const tlDolarFiyati = data.try.inverseRate; // dolarAl fonksiyonu çıktısına göre ayarlayın
+
+                const fiyatElementi = document.getElementById('fiyatTL');
+                fiyatElementi.textContent = tlDolarFiyati;
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        };
+
+    TLYazdir();
+        const veriCek = async () => {
+            try {
+                const response = await fetch('/veri');
+                const data = await response.json();
+                
+                // console.log(data);
+                veriListesi.innerHTML = ''; // Önceki içeriği temizle
+
+                data.map((elem) => {
+                    const p = document.createElement('p');
+                    p.innerText = elem.body;
+                    veriListesi.appendChild(p);
+                });
+            } catch (error) {
+                console.log(error);
+            }
+
+
+        };
+
+     
+
+        veriCekButton.addEventListener('click', async () => {
+            await veriCek();
+
+        });
+
+        postBTN.addEventListener('click', async() => {
+            const data = {
+                isim : isim.value,
+            };
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' /* içerik tipi json*/
+                },
+                body: JSON.stringify(data)
+            });
+            console.log(data);
+            // veriCekButton.click();
+        }); 
+
+
+        const WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+        function updateTime(){
+            var now = new Date();
+
+            document.getElementById("time").innerText=
+                zeroPadding(now.getHours(), 2) + ":" +
+                zeroPadding(now.getMinutes(), 2) + ":" +
+                zeroPadding(now.getSeconds(), 2);
+
+            document.getElementById("date").innerText =
+                now.getFullYear() + "-" +
+                zeroPadding(now.getMonth() + 1, 2) + "-" +
+                zeroPadding(now.getDate(), 2) + " " + 
+                WEEK[now.getDay()]; 
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        function zeroPadding(num, digit) {
+            return String(num).padStart(digit, '0');
+        }
+
+
+
+    </script>
+</body>
+</html>
