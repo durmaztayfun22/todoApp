@@ -19,9 +19,13 @@
     <br>
     <br>
     <br>
-    <h1>Anlık Dolar-TL Fiyatı: <span id="fiyatDOLAR"></span></h1>
-    <h1>Anlık TL-Dolar Fiyatı: <span id="fiyatTL"></span></h1>
+    <h1>Anlık 1 Dolar- kaç TL Fiyatı: <span id="fiyatDOLAR"></span></h1>
+    <h1>Anlık 1 TL- kaç Dolar Fiyatı: <span id="fiyatTL"></span></h1>
     <br>
+    <h3>TL değeri yazın Dolar değerini göstereyim</h3>
+    <input type="text" id="deger">
+    <button id="sonuc">Sonuc</button>
+    <span id="yazdir"></span>
     <br>
     <br>
     
@@ -38,7 +42,25 @@
         const veriCekButton = document.getElementById('veriCekButton');
         const postBTN = document.getElementById('post');
         const veriListesi = document.getElementById('veriListesi');
+
+        const deger = document.getElementById('deger');
+        const sonuc = document.getElementById('sonuc');
         const url = "https://www.floatrates.com/daily/usd.json";
+
+        const fonksiyon = async() => {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const dolarTlFiyati = data.try.rate;
+                const fiyatElementi = document.getElementById('yazdir');
+                fiyatElementi.textContent = deger.value / dolarTlFiyati;
+        }
+        
+        sonuc.addEventListener('click', async () => {
+            await fonksiyon();
+        })
+
+        
         // const fiyatDOLAR = document.getElementById('fiyatDOLAR');
         // const fiyatTL = document.getElementById('fiyatTL');
 
