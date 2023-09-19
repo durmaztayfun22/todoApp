@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
     <title>Tayfun Durmaz</title>
     
 </head>
@@ -17,6 +19,10 @@
     </div>
 
     <br>
+    <h1>Hava Durumu</h1>
+    <p>Konum: <span id="location"></span></p>
+    <p>Hava Durumu: <span id="weather"></span></p>
+    <p>Sıcaklık: <span id="temperature"></span>°C</p>
     <br>
     <br>
     <h1>Anlık 1 Dolar- kaç TL Fiyatı: <span id="fiyatDOLAR"></span></h1>
@@ -53,6 +59,17 @@
         const degerDolar = document.getElementById('degerDolar');
         const sonucDolar = document.getElementById('sonucDolar');
         const url = "https://www.floatrates.com/daily/usd.json";
+
+        // API anahtarı (Kendi API anahtarınızı kullanmalısınız)  --- HAVA DURUMU
+        const apiKey = 'YOUR_API_KEY';
+
+        // Hava durumu bilgisini çekmek için kullanılacak API URL'si
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=CANAKKALE&appid=${apiKey}&units=metric`;
+
+        // HTML içindeki elementlere erişim
+        const locationElement = document.getElementById('location');
+        const weatherElement = document.getElementById('weather');
+        const temperatureElement = document.getElementById('temperature');
 
         const fonksiyon = async() => {
                 const response = await fetch(url);
@@ -184,6 +201,26 @@
         }
 
 
+        
+
+        // Hava durumu bilgisini çekme fonksiyonu
+        async function fetchWeather() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                console.log(data);
+
+                // Verileri HTML içinde gösterme
+                locationElement.textContent = data.name;
+                weatherElement.textContent = data.weather[0].description;
+                temperatureElement.textContent = data.main.temp;
+            } catch (error) {
+                console.error('Hata:', error);
+            }
+        }
+
+        // Sayfa yüklendiğinde hava durumu bilgisini çekme
+        window.onload = fetchWeather;
 
     </script>
 </body>
