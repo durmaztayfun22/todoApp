@@ -28,7 +28,12 @@
     <span id="yazdir"></span>
     <br>
     <br>
-    
+    <h3>Dolar değeri yazın TL değerini göstereyim</h3>
+    <input type="text" id="degerDolar">
+    <button id="sonucDolar">Sonuc</button>
+    <span id="yazdirDolar"></span>
+    <br>
+    <br>
     <input type="text" id="isim" class="yazi" placeholder="Lütfen Birşeyler yaz">
     <button id="veriCekButton" class="buton">VeriCek</button>
     <button id="post">post</button>
@@ -45,6 +50,8 @@
 
         const deger = document.getElementById('deger');
         const sonuc = document.getElementById('sonuc');
+        const degerDolar = document.getElementById('degerDolar');
+        const sonucDolar = document.getElementById('sonucDolar');
         const url = "https://www.floatrates.com/daily/usd.json";
 
         const fonksiyon = async() => {
@@ -58,6 +65,20 @@
         
         sonuc.addEventListener('click', async () => {
             await fonksiyon();
+        })
+
+
+        const fonksiyonDolar = async() => {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const dolarTlFiyati = data.try.rate;
+                const fiyatElementi = document.getElementById('yazdirDolar');
+                fiyatElementi.textContent = degerDolar.value * dolarTlFiyati;
+        }
+        
+        sonucDolar.addEventListener('click', async () => {
+            await fonksiyonDolar();
         })
 
         
