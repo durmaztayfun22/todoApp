@@ -61,10 +61,13 @@
         const url = "https://www.floatrates.com/daily/usd.json";
 
         // API anahtarı (Kendi API anahtarınızı kullanmalısınız)  --- HAVA DURUMU
-        const apiKey = 'YOUR_API_KEY';
+        // API anahtarınızı buraya ekleyin
+        const apiKey = 'cc0f73afcaf54266a8431cacb2fb13d4';
 
         // Hava durumu bilgisini çekmek için kullanılacak API URL'si
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=CANAKKALE&appid=${apiKey}&units=metric`;
+        const lat = 40.1553; // Çanakkale'nin enlem koordinatı
+        const lon = 26.4142; // Çanakkale'nin boylam koordinatı
+        const apiUrl = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}&include=minutely`;
 
         // HTML içindeki elementlere erişim
         const locationElement = document.getElementById('location');
@@ -211,9 +214,9 @@
                 console.log(data);
 
                 // Verileri HTML içinde gösterme
-                locationElement.textContent = data.name;
-                weatherElement.textContent = data.weather[0].description;
-                temperatureElement.textContent = data.main.temp;
+                locationElement.textContent = data.data[0].city_name; // Şehir adını alın
+                weatherElement.textContent = data.data[0].weather.description; // Hava durumu açıklamasını alın
+                temperatureElement.textContent = data.data[0].temp; // Sıcaklığı alın
             } catch (error) {
                 console.error('Hata:', error);
             }
