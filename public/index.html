@@ -43,6 +43,7 @@
     <input type="text" id="isim" class="yazi" placeholder="Lütfen Birşeyler yaz">
     <button id="veriCekButton" class="buton">VeriCek</button>
     <button id="post">post</button>
+
     
     
     <div id="veriListesi"></div>
@@ -146,8 +147,26 @@
 
                 data.map((elem) => {
                     const p = document.createElement('p');
+                    const del = document.createElement('button');
                     p.innerText = elem.body;
+                    del.innerText = 'delete';
+                    const uniqueClass = 'del-' + Math.random().toString(36).substr(2, 9);
+                    del.classList.add(uniqueClass);
                     veriListesi.appendChild(p);
+                    veriListesi.appendChild(del);
+                    const trashcan = document.querySelector('.' + uniqueClass);
+
+                    trashcan.addEventListener('click', (e) => {
+                        const endpoint = `/veri/${elem._id}`;
+
+                        fetch(endpoint, {
+                            method: 'DELETE',
+                        })
+                        .then(response => response.json())
+                        .then(data => window.location.href = '/')
+                        .catch(err => console.log(err));
+                    });
+
                 });
             } catch (error) {
                 console.log(error);
@@ -156,8 +175,7 @@
 
         };
 
-     
-
+       
         veriCekButton.addEventListener('click', async () => {
             await veriCek();
 

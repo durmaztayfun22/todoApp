@@ -119,17 +119,18 @@ app.post('/' , async (req,res) => { // req ---> istek    res ---> cevap
  //FURKAN ADAMDIR
 
 
-app.delete('/', (req,res) => {
-    try {
-        array.pop();
-        const data = {
-            popedar : array,
-        };
-        res.json(data);
-    } catch (error) {
-        console.log(error);
-    }
+ app.delete('/veri/:id', (req, res) => {
+    const id = req.params.id;
+
+    Blog.findByIdAndDelete(id)
+        .then(result => {
+            res.json({ redirect: '/' });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
+
 
 
 app.listen(port, () => {
