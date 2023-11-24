@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f0f0f0;
+    margin: 0; /* Ekstra kenar boşluğunu kaldır */
 }
 
 .head {
@@ -28,6 +29,7 @@ button {
     padding: 8px;
     font-size: 16px;
     margin: 5px;
+    width: 100%; /* Mobil cihazlarda genişlik 100% olsun */
 }
 
 /* ToDo listesi */
@@ -88,4 +90,27 @@ li {
     border-radius: 5px;
     padding: 4px 8px;
     cursor: pointer;
+}
+
+/* Mobil ekranlar için stil */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 16px; /* Metin boyutunu azalt */
+    }
+
+    .head {
+        font-size: 24px; /* Başlık boyutunu azalt */
+    }
+
+    .clock {
+        font-size: 18px; /* Saat ve tarih boyutunu azalt */
+    }
+
+    h1 {
+        font-size: 18px; /* Başlık boyutunu azalt */
+    }
+
+    .todo-container {
+        padding: 10px; /* Yapılacaklar listesi kutusu padding'i azalt */
+    }
 }

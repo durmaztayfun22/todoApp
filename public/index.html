@@ -69,6 +69,7 @@
         const lat = 40.1553; // Çanakkale'nin enlem koordinatı
         const lon = 26.4142; // Çanakkale'nin boylam koordinatı
         const apiUrl = `https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}&include=minutely`;
+        //https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${apiKey}&include=minutely
 
         // HTML içindeki elementlere erişim
         const locationElement = document.getElementById('location');
@@ -197,7 +198,7 @@
         }); 
 
 
-        const WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+        const WEEK = ["SUNDAY (pazar)", "MONDAY (pazartesi)", "TUESDAY (salı)", "WEDNESDAY (çarşamba)", "THURSDAY (perşembe)", "FRIDAY (cuma)", "SATURDAY (cumartesi)"];
 
         function updateTime(){
             var now = new Date();
